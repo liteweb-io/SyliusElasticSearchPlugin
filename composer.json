@@ -52,5 +52,8 @@
             "Sylius\\ElasticSearchPlugin\\": "src/",
             "Tests\\Sylius\\ElasticSearchPlugin\\": "tests/"
         }
+    },
+    "autoload-dev": {
+        "classmap": ["tests/Application/app/AppKernel.php"]
     }
 }
