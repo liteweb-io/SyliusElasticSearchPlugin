@@ -75,7 +75,6 @@ final class ResetProductIndexCommand extends Command
             $this->elasticsearchManager->dropAndCreateIndex();
 
             $productDocumentsCreated = 0;
-            $productDocumentsWaitingForCommit = 0;
 
             /** @var ProductInterface[] $products */
             $products = $this->productRepository->findAll();
@@ -97,17 +96,10 @@ final class ResetProductIndexCommand extends Command
 
                         $this->elasticsearchManager->persist($productDocument);
 
-                        ++$productDocumentsWaitingForCommit;
-                        if (($productDocumentsWaitingForCommit % 100) === 0) {
+                        ++$productDocumentsCreated;
+                        if (($productDocumentsCreated % 100) === 0) {
                             $this->elasticsearchManager->commit();
-                            $productDocumentsCreated += $productDocumentsWaitingForCommit;
-                            $productDocumentsWaitingForCommit = 0;
                         }
-                    }
-                    if($productDocumentsWaitingForCommit > 0) {
-                        $this->elasticsearchManager->commit();
-                        $productDocumentsCreated += $productDocumentsWaitingForCommit;
-                        $productDocumentsWaitingForCommit = 0;
                     }
                 }
             }
