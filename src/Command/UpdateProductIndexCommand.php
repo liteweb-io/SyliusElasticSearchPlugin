@@ -75,7 +75,7 @@ final class UpdateProductIndexCommand extends Command
         $lockHandler = new LockHandler('sylius-elastic-index-update');
         if ($lockHandler->lock()) {
             $processedProductsCodes = [];
-            $productDocumentsUpdated = 0;
+            $productDocumentsWaitingForCommit = 0;
 
             $search = $this->productDocumentRepository->createSearch();
             $search->setScroll('10m');
@@ -96,12 +96,17 @@ final class UpdateProductIndexCommand extends Command
                 $this->scheduleCreatingNewProductDocuments($productCode);
                 $this->scheduleRemovingOldProductDocuments($productCode);
 
-                ++$productDocumentsUpdated;
-                if (($productDocumentsUpdated % 100) === 0) {
+                ++$productDocumentsWaitingForCommit;
+                if (($productDocumentsWaitingForCommit % 100) === 0) {
                     $this->elasticsearchManager->commit();
+                    $productDocumentsWaitingForCommit = 0;
                 }
 
                 $processedProductsCodes[$productCode] = 1;
+            }
+
+            if ($productDocumentsWaitingForCommit > 0) {
+                $this->elasticsearchManager->commit();
             }
             $lockHandler->release();
             $output->writeln('Updates done');
