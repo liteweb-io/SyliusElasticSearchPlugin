@@ -84,11 +84,11 @@ final class SearchController
 
         if (!$request->query->has('sort')) {
             if (null !== $request->get('taxonCode')) {
-                $request->query->set('sort', ['taxonPositionByCode' => [$request->get('taxonCode') => 'ASC']]);
+                $request->query->set('sort', ['taxonPositionByCode' => [$request->get('taxonCode') => 'asc']]);
             }
 
             if (null !== $request->get('taxonSlug')) {
-                $request->query->set('sort', ['taxonPositionBySlug' => [$request->get('taxonSlug') => 'ASC']]);
+                $request->query->set('sort', ['taxonPositionBySlug' => [$request->get('taxonSlug') => 'asc']]);
             }
         }
 

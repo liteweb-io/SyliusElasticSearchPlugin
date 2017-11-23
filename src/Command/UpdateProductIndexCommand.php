@@ -79,7 +79,7 @@ final class UpdateProductIndexCommand extends Command
 
             $search = $this->productDocumentRepository->createSearch();
             $search->setScroll('10m');
-            $search->addSort(new FieldSort('synchronised_at', 'ASC'));
+            $search->addSort(new FieldSort('synchronised_at', 'asc'));
 
             /** @var DocumentIterator|ProductDocument[] $productDocuments */
             $productDocuments = $this->productDocumentRepository->findDocuments($search);
