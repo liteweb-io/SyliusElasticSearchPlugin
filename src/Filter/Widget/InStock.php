@@ -59,6 +59,7 @@ class InStock extends AbstractRange
             $normalized[$gt] = $values[0];
         }
         if ($argumentCount === 2) {
+            $normalized[$gt] = $values[0];
             $normalized[$lt] = $values[1];
         }
 
