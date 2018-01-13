@@ -1137,13 +1137,13 @@ $this->client->request('GET', '/shop-api/products', ['attributes' => ['Mug mater
 * By attribute name and value:
 
     ```
-        /shop-api/products?channel=WEB_DE&attributes[Attribute name]=value
+        /shop-api/products?channel=WEB_DE&attributes[Attribute name][0]=value
     ```
     
 * By attribute code and value:
     
     ```
-        /shop-api/products?channel=WEB_DE&attributesByCode[ATTRIBUTE_CODE]=value
+        /shop-api/products?channel=WEB_DE&attributesByCode[ATTRIBUTE_CODE][0]=value
     ```
 
 13. Reindexing Elasticsearch
