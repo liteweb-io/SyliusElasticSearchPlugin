@@ -33,23 +33,7 @@ Elastic search for Sylius.
      new \Sylius\ElasticSearchPlugin\SyliusElasticSearchPlugin(),
     ```
 
-5. Create/Setup database:
-
-    ```bash
-    $ bin/console ongr:es:index:create
-    $ bin/console do:da:cr
-    $ bin/console do:sch:cr
-    $ bin/console syl:fix:lo
-    ```
-
-    If there is a problem with creating elastic search index run those commands:
-
-    ```bash
-    $ bin/console ongr:es:index:drop --force
-    $ bin/console ongr:es:index:create
-    ```
-
-7. Import config file in `app/config/config.yml` for default filter set configuration:
+5. Import config file in `app/config/config.yml` for default filter set configuration:
 
     ```yaml
     imports:
@@ -57,7 +41,7 @@ Elastic search for Sylius.
     ```
     For more configuration take a look at [ONGRFilterManager](http://docs.ongr.io/FilterManagerBundle)
 
-8. Configure ONGR bundle in `app/config/config.yml`:
+6. Configure ONGR bundle in `app/config/config.yml`:
 
     ```yaml
     ongr_elasticsearch:
@@ -72,13 +56,28 @@ Elastic search for Sylius.
         attribute_whitelist: ['MUG_COLLECTION_CODE', 'MUG_MATERIAL_CODE'] #Only attibutes with these codes will be indexed
     ```
 
-8. Import routing file:
+7. Import routing file:
 
     ```yaml
        sylius_search:
            resource: "@SyliusElasticSearchPlugin/Resources/config/routing.yml"
     ```
+8. Create/Setup database:
 
+    ```bash
+    $ bin/console ongr:es:index:create
+    $ bin/console do:da:cr
+    $ bin/console do:sch:cr
+    $ bin/console syl:fix:lo
+    ```
+
+    If there is a problem with creating elastic search index run those commands:
+
+    ```bash
+    $ bin/console ongr:es:index:drop --force
+    $ bin/console ongr:es:index:create
+    ```
+    
 9. Example Request/Response:
 
 It's required to pass `channel` argument to the search.
@@ -98,333 +97,337 @@ Request:
     /shop-api/taxon-products/mugs?channel=WEB_GB
 ```
 
-Response:
+<details> 
+  <summary>Response:</summary>
+  <p>
 
 ```json
-{
-    "items": [
-        {
-            "code": "LOGAN_MUG_CODE",
-            "name": "Logan Mug",
-            "slug": "logan-mug",
-            "taxons": [
-                {
-                    "code": "MUG",
-                    "slug": "mugs",
-                    "position": 0,
-                    "images": [],
-                    "description": "@string@"
-                }
-            ],
-            "variants": [
-                {
-                    "code": "LOGAN_MUG_CODE",
-                    "name": "Logan Mug",
-                    "price": {
-                        "current": 1999,
-                        "currency": "GBP"
-                    },
-                    "images": []
-                }
-            ],
-            "attributes": [
-                {
-                    "code": "MUG_COLLECTION_CODE",
-                    "name": "Mug collection",
-                    "value": "HOLIDAY COLLECTION"
-                },
-                {
-                    "code": "MUG_MATERIAL_CODE",
-                    "name": "Mug material",
-                    "value": "Wood"
-                }
-            ],
-            "images": [],
-            "channelCode": "WEB_GB",
-            "localeCode": "en_GB",
-            "mainTaxon": {
-                "code": "MUG",
-                "slug": "mugs",
-                "images": [],
-                "description": "@string@"
-            }
-        },
-        {
-            "code": "LOGAN_MUG_CODE",
-            "name": "Logan Becher",
-            "slug": "logan-becher",
-            "taxons": [
-                {
-                    "code": "MUG",
-                    "slug": "mugs",
-                    "position": 0,
-                    "images": [],
-                    "description": "@string@"
-                }
-            ],
-            "variants": [
-                {
-                    "code": "LOGAN_MUG_CODE",
-                    "name": "Logan Becher",
-                    "price": {
-                        "current": 1999,
-                        "currency": "GBP"
-                    },
-                    "images": []
-                }
-            ],
-            "attributes": [
-                {
-                    "code": "MUG_COLLECTION_CODE",
-                    "name": "Mug collection",
-                    "value": "FEIERTAGSKOLLEKTION"
-                },
-                {
-                    "code": "MUG_MATERIAL_CODE",
-                    "name": "Mug material",
-                    "value": "Holz"
-                }
-            ],
-            "images": [],
-            "channelCode": "WEB_GB",
-            "localeCode": "de_DE",
-            "mainTaxon": {
-                "code": "MUG",
-                "slug": "mugs",
-                "images": [],
-                "description": "@string@"
-            }
-        }
-    ],
-    "filters": {
-        "channel": {
-            "state": {
-                "active": false,
-                "urlParameters": [],
-                "name": "channel",
-                "options": []
-            },
-            "tags": [],
-            "urlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "resetUrlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "name": "channel",
-            "choices": [
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "mugs",
-                        "channel": "WEB_GB"
-                    },
-                    "label": "WEB_GB",
-                    "count": 2
-                }
-            ]
-        },
-        "taxon_slug": {
-            "state": {
-                "active": true,
-                "value": "mugs",
-                "urlParameters": {
-                    "taxon_slug": "mugs"
-                },
-                "name": "taxon_slug",
-                "options": []
-            },
-            "tags": [],
-            "urlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "resetUrlParameters": [],
-            "name": "taxon_slug",
-            "choices": [
-                {
-                    "active": true,
-                    "default": false,
-                    "urlParameters": [],
-                    "label": "mugs",
-                    "count": 2
-                },
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "t-shirts"
-                    },
-                    "label": "t-shirts",
-                    "count": 2
-                }
-            ]
-        },
-        "price_range": {
-            "state": {
-                "active": false,
-                "urlParameters": [],
-                "name": "price_range",
-                "options": []
-            },
-            "tags": [],
-            "urlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "resetUrlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "name": "price_range",
-            "minBounds": 1999,
-            "maxBounds": 1999
-        },
-        "locale": {
-            "state": {
-                "active": false,
-                "urlParameters": [],
-                "name": "locale",
-                "options": []
-            },
-            "tags": [],
-            "urlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "resetUrlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "name": "locale",
-            "choices": [
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "mugs",
-                        "locale_code": "de_DE"
-                    },
-                    "label": "de_DE",
-                    "count": 1
-                },
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "mugs",
-                        "locale_code": "en_GB"
-                    },
-                    "label": "en_GB",
-                    "count": 1
-                }
-            ]
-        },
-        "attribute_values": {
-            "state": {
-                "active": false,
-                "urlParameters": [],
-                "name": "attribute_values",
-                "options": []
-            },
-            "tags": [],
-            "urlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "resetUrlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "name": "attribute_values",
-            "choices": [
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "mugs",
-                        "attributeValues": [
-                            "FEIERTAGSKOLLEKTION"
-                        ]
-                    },
-                    "label": "FEIERTAGSKOLLEKTION",
-                    "count": 1
-                },
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "mugs",
-                        "attributeValues": [
-                            "HOLIDAY COLLECTION"
-                        ]
-                    },
-                    "label": "HOLIDAY COLLECTION",
-                    "count": 1
-                },
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "mugs",
-                        "attributeValues": [
-                            "Holz"
-                        ]
-                    },
-                    "label": "Holz",
-                    "count": 1
-                },
-                {
-                    "active": false,
-                    "default": false,
-                    "urlParameters": {
-                        "taxon_slug": "mugs",
-                        "attributeValues": [
-                            "Wood"
-                        ]
-                    },
-                    "label": "Wood",
-                    "count": 1
-                }
-            ]
-        },
-        "paginator": {
-            "state": {
-                "active": false,
-                "value": 1,
-                "urlParameters": [],
-                "name": "paginator",
-                "options": []
-            },
-            "tags": [],
-            "urlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "resetUrlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "name": "paginator",
-            "currentPage": 1,
-            "totalItems": 2,
-            "maxPages": 10,
-            "itemsPerPage": 10,
-            "numPages": 1,
-            "options": []
-        },
-        "search": {
-            "state": {
-                "active": false,
-                "urlParameters": [],
-                "name": "search",
-                "options": []
-            },
-            "tags": [],
-            "urlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "resetUrlParameters": {
-                "taxon_slug": "mugs"
-            },
-            "name": "search"
-        }
-    }
-}
-```
-
+             {
+                 "items": [
+                     {
+                         "code": "LOGAN_MUG_CODE",
+                         "name": "Logan Mug",
+                         "slug": "logan-mug",
+                         "taxons": [
+                             {
+                                 "code": "MUG",
+                                 "slug": "mugs",
+                                 "position": 0,
+                                 "images": [],
+                                 "description": "@string@"
+                             }
+                         ],
+                         "variants": [
+                             {
+                                 "code": "LOGAN_MUG_CODE",
+                                 "name": "Logan Mug",
+                                 "price": {
+                                     "current": 1999,
+                                     "currency": "GBP"
+                                 },
+                                 "images": []
+                             }
+                         ],
+                         "attributes": [
+                             {
+                                 "code": "MUG_COLLECTION_CODE",
+                                 "name": "Mug collection",
+                                 "value": "HOLIDAY COLLECTION"
+                             },
+                             {
+                                 "code": "MUG_MATERIAL_CODE",
+                                 "name": "Mug material",
+                                 "value": "Wood"
+                             }
+                         ],
+                         "images": [],
+                         "channelCode": "WEB_GB",
+                         "localeCode": "en_GB",
+                         "mainTaxon": {
+                             "code": "MUG",
+                             "slug": "mugs",
+                             "images": [],
+                             "description": "@string@"
+                         }
+                     },
+                     {
+                         "code": "LOGAN_MUG_CODE",
+                         "name": "Logan Becher",
+                         "slug": "logan-becher",
+                         "taxons": [
+                             {
+                                 "code": "MUG",
+                                 "slug": "mugs",
+                                 "position": 0,
+                                 "images": [],
+                                 "description": "@string@"
+                             }
+                         ],
+                         "variants": [
+                             {
+                                 "code": "LOGAN_MUG_CODE",
+                                 "name": "Logan Becher",
+                                 "price": {
+                                     "current": 1999,
+                                     "currency": "GBP"
+                                 },
+                                 "images": []
+                             }
+                         ],
+                         "attributes": [
+                             {
+                                 "code": "MUG_COLLECTION_CODE",
+                                 "name": "Mug collection",
+                                 "value": "FEIERTAGSKOLLEKTION"
+                             },
+                             {
+                                 "code": "MUG_MATERIAL_CODE",
+                                 "name": "Mug material",
+                                 "value": "Holz"
+                             }
+                         ],
+                         "images": [],
+                         "channelCode": "WEB_GB",
+                         "localeCode": "de_DE",
+                         "mainTaxon": {
+                             "code": "MUG",
+                             "slug": "mugs",
+                             "images": [],
+                             "description": "@string@"
+                         }
+                     }
+                 ],
+                 "filters": {
+                     "channel": {
+                         "state": {
+                             "active": false,
+                             "urlParameters": [],
+                             "name": "channel",
+                             "options": []
+                         },
+                         "tags": [],
+                         "urlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "resetUrlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "name": "channel",
+                         "choices": [
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "mugs",
+                                     "channel": "WEB_GB"
+                                 },
+                                 "label": "WEB_GB",
+                                 "count": 2
+                             }
+                         ]
+                     },
+                     "taxon_slug": {
+                         "state": {
+                             "active": true,
+                             "value": "mugs",
+                             "urlParameters": {
+                                 "taxon_slug": "mugs"
+                             },
+                             "name": "taxon_slug",
+                             "options": []
+                         },
+                         "tags": [],
+                         "urlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "resetUrlParameters": [],
+                         "name": "taxon_slug",
+                         "choices": [
+                             {
+                                 "active": true,
+                                 "default": false,
+                                 "urlParameters": [],
+                                 "label": "mugs",
+                                 "count": 2
+                             },
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "t-shirts"
+                                 },
+                                 "label": "t-shirts",
+                                 "count": 2
+                             }
+                         ]
+                     },
+                     "price_range": {
+                         "state": {
+                             "active": false,
+                             "urlParameters": [],
+                             "name": "price_range",
+                             "options": []
+                         },
+                         "tags": [],
+                         "urlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "resetUrlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "name": "price_range",
+                         "minBounds": 1999,
+                         "maxBounds": 1999
+                     },
+                     "locale": {
+                         "state": {
+                             "active": false,
+                             "urlParameters": [],
+                             "name": "locale",
+                             "options": []
+                         },
+                         "tags": [],
+                         "urlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "resetUrlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "name": "locale",
+                         "choices": [
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "mugs",
+                                     "locale_code": "de_DE"
+                                 },
+                                 "label": "de_DE",
+                                 "count": 1
+                             },
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "mugs",
+                                     "locale_code": "en_GB"
+                                 },
+                                 "label": "en_GB",
+                                 "count": 1
+                             }
+                         ]
+                     },
+                     "attribute_values": {
+                         "state": {
+                             "active": false,
+                             "urlParameters": [],
+                             "name": "attribute_values",
+                             "options": []
+                         },
+                         "tags": [],
+                         "urlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "resetUrlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "name": "attribute_values",
+                         "choices": [
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "mugs",
+                                     "attributeValues": [
+                                         "FEIERTAGSKOLLEKTION"
+                                     ]
+                                 },
+                                 "label": "FEIERTAGSKOLLEKTION",
+                                 "count": 1
+                             },
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "mugs",
+                                     "attributeValues": [
+                                         "HOLIDAY COLLECTION"
+                                     ]
+                                 },
+                                 "label": "HOLIDAY COLLECTION",
+                                 "count": 1
+                             },
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "mugs",
+                                     "attributeValues": [
+                                         "Holz"
+                                     ]
+                                 },
+                                 "label": "Holz",
+                                 "count": 1
+                             },
+                             {
+                                 "active": false,
+                                 "default": false,
+                                 "urlParameters": {
+                                     "taxon_slug": "mugs",
+                                     "attributeValues": [
+                                         "Wood"
+                                     ]
+                                 },
+                                 "label": "Wood",
+                                 "count": 1
+                             }
+                         ]
+                     },
+                     "paginator": {
+                         "state": {
+                             "active": false,
+                             "value": 1,
+                             "urlParameters": [],
+                             "name": "paginator",
+                             "options": []
+                         },
+                         "tags": [],
+                         "urlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "resetUrlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "name": "paginator",
+                         "currentPage": 1,
+                         "totalItems": 2,
+                         "maxPages": 10,
+                         "itemsPerPage": 10,
+                         "numPages": 1,
+                         "options": []
+                     },
+                     "search": {
+                         "state": {
+                             "active": false,
+                             "urlParameters": [],
+                             "name": "search",
+                             "options": []
+                         },
+                         "tags": [],
+                         "urlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "resetUrlParameters": {
+                             "taxon_slug": "mugs"
+                         },
+                         "name": "search"
+                     }
+                 }
+             }
+``` 
+  </p>
+</details>
+<br />
 10. Filtering by attributes:
 
 You need use attributes query parameter which is an associative array where key is the attribute name and value is an array of attribute values.
@@ -434,7 +437,11 @@ $this->client->request('GET', '/shop-api/products', ['attributes' => ['Mug mater
 ```
 
 This filter also aggregates all attribute values and it will group them by attribute name
-Aggregation response from this request:
+
+
+<details> 
+  <summary>Aggregation response from this request:</summary>
+  <p>
 
 ```json
   "attributes":{
@@ -546,7 +553,9 @@ Aggregation response from this request:
       ]
     }
 ```
-
+  </p>
+</details>
+<br />
 You can combine filters so for example if you want your products to be filtered in specific locale you can add another query parameter
 
 Example request with locale:
@@ -554,7 +563,9 @@ Example request with locale:
 $this->client->request('GET', '/shop-api/products', ['attributes' => ['Mug material' => ['Wood']], 'locale' => 'en_GB'], [], ['ACCEPT' => 'application/json']);
 ```
 
-Aggregation response from this request:
+<details> 
+  <summary>Aggregation response from this request:</summary>
+  <p>
 
 ```json
   "attributes":{  
@@ -655,8 +666,12 @@ Aggregation response from this request:
          ]
       }
 ```
-
-Whole response:
+  </p>
+</details>
+<br />
+<details> 
+  <summary>Whole response:</summary>
+  <p>
 
 ```json
 {
@@ -1088,7 +1103,9 @@ Whole response:
    }
 }
 ```
-
+  </p>
+</details>
+<br />
 11. Sorting
 
 * By name ascending:
@@ -1120,13 +1137,13 @@ Whole response:
 * By attribute name and value:
 
     ```
-        /shop-api/products?channel=WEB_DE&attributes[Attribute name]=value
+        /shop-api/products?channel=WEB_DE&attributes[Attribute name][0]=value
     ```
     
 * By attribute code and value:
     
     ```
-        /shop-api/products?channel=WEB_DE&attributesByCode[ATTRIBUTE_CODE]=value
+        /shop-api/products?channel=WEB_DE&attributesByCode[ATTRIBUTE_CODE][0]=value
     ```
 
 13. Reindexing Elasticsearch
