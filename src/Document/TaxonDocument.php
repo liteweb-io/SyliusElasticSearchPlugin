@@ -111,7 +111,7 @@ class TaxonDocument
     /**
      * @param Collection $images
      */
-    public function setImages(Collection $images): void
+    public function setImages($images): void
     {
         $this->images = $images;
     }
