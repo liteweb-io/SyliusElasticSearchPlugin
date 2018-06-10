@@ -358,7 +358,7 @@ class ProductDocument
     /**
      * @param Collection $attributes
      */
-    public function setAttributes(Collection $attributes): void
+    public function setAttributes($attributes): void
     {
         $this->attributes = $attributes;
     }
@@ -374,7 +374,7 @@ class ProductDocument
     /**
      * @param Collection $images
      */
-    public function setImages(Collection $images): void
+    public function setImages($images): void
     {
         $this->images = $images;
     }
@@ -438,7 +438,7 @@ class ProductDocument
     /**
      * @param Collection $variants
      */
-    public function setVariants(Collection $variants): void
+    public function setVariants($variants): void
     {
         $this->variants = $variants;
     }
