@@ -1,5 +1,5 @@
 {
-    "name": "sylius/elastic-search-plugin",
+    "name": "liteweb-io/elastic-search-plugin",
     "type": "sylius-bundle",
     "description": "Elastic search integration for Sylius.",
     "license": "MIT",
