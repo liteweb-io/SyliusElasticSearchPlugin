@@ -334,7 +334,7 @@ class ProductDocument
     /**
      * @return Collection|TaxonDocument[]
      */
-    public function getTaxons(): Collection
+    public function getTaxons()
     {
         return $this->taxons;
     }
@@ -350,7 +350,7 @@ class ProductDocument
     /**
      * @return Collection
      */
-    public function getAttributes(): Collection
+    public function getAttributes()
     {
         return $this->attributes;
     }
@@ -366,7 +366,7 @@ class ProductDocument
     /**
      * @return Collection
      */
-    public function getImages(): Collection
+    public function getImages()
     {
         return $this->images;
     }
@@ -430,7 +430,7 @@ class ProductDocument
     /**
      * @return Collection
      */
-    public function getVariants(): Collection
+    public function getVariants()
     {
         return $this->variants;
     }
