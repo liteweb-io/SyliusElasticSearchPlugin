@@ -77,7 +77,7 @@ final class ResetProductIndexCommand extends Command
             $productDocumentsCreated = 0;
 
             /** @var ProductInterface[] $products */
-            $products = $this->productRepository->findAll();
+            $products = $this->productRepository->findAllReviewed();
 
             $output->writeln(sprintf('Loading %d products into ElasticSearch', count($products)));
 
