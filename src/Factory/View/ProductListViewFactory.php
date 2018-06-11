@@ -92,7 +92,7 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
      *
      * @return ImageView[]
      */
-    private function getImageViews(Collection $images): array
+    private function getImageViews($images): array
     {
         $imageViews = [];
         foreach ($images as $image) {
@@ -113,7 +113,7 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
      *
      * @return TaxonView
      */
-    private function getTaxonView(Collection $taxons, ?TaxonDocument $mainTaxonDocument): TaxonView
+    private function getTaxonView($taxons, ?TaxonDocument $mainTaxonDocument): TaxonView
     {
         /** @var TaxonView $taxonView */
         $taxonView = new $this->taxonViewClass();
@@ -131,7 +131,7 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
      *
      * @return AttributeView[]
      */
-    private function getAttributeViews(Collection $attributes): array
+    private function getAttributeViews($attributes): array
     {
         $attributeValueViews = [];
         foreach ($attributes as $attribute) {
@@ -168,7 +168,7 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
      *
      * @return array
      */
-    private function getVariantViews(Collection $variants): array
+    private function getVariantViews($variants): array
     {
         $variantViews = [];
         foreach ($variants as $variant) {
