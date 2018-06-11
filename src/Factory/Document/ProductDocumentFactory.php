@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Sylius\ElasticSearchPlugin\Factory\Document;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
-use ONGR\ElasticsearchBundle\Collection\Collection;
+use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -86,6 +87,7 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
         ChannelInterface $channel
     ): ProductDocument {
         /** @var ProductVariantInterface[] $productVariants */
+
         $productVariants = $product->getVariants()->filter(function (ProductVariantInterface $productVariant) use ($channel): bool {
             return $productVariant->hasChannelPricingForChannel($channel);
         });
@@ -145,10 +147,10 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
         $productDocument->setCreatedAt($product->getCreatedAt());
         $productDocument->setSynchronisedAt(new \DateTime('now'));
         $productDocument->setAverageReviewRating($product->getAverageRating());
-        $productDocument->setVariants(new Collection($variantDocuments));
-        $productDocument->setImages(new Collection($imageDocuments));
-        $productDocument->setTaxons(new Collection($taxonDocuments));
-        $productDocument->setAttributes(new Collection($attributeDocuments));
+        $productDocument->setVariants(new ArrayCollection($variantDocuments));
+        $productDocument->setImages(new ArrayCollection($imageDocuments));
+        $productDocument->setTaxons(new ArrayCollection($taxonDocuments));
+        $productDocument->setAttributes(new ArrayCollection($attributeDocuments));
 
         /**
          * Set smallest product variant price, used for search by price
@@ -224,13 +226,20 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
             $channel->getDefaultLocale()->getCode()
         );
 
+        //dump($productAttributes); die;
+
         $attributeDocuments = [];
         foreach ($productAttributes as $syliusProductAttributeValue) {
             if (in_array($syliusProductAttributeValue->getCode(), $this->attributeWhitelist, true) || empty($this->attributeWhitelist)) {
+
+                $value = isset($syliusProductAttributeValue->getAttribute()->getConfiguration()['choices']) ?
+                    $syliusProductAttributeValue->getAttribute()->getConfiguration()['choices'][$syliusProductAttributeValue->getValue()[0]][$channel->getDefaultLocale()->getCode()] :
+                    $syliusProductAttributeValue->getValue();
+
                 $attributeDocuments = array_merge(
                     $attributeDocuments,
                     $this->attributeDocumentFactory->create(
-                        $syliusProductAttributeValue->getValue(),
+                        $value,
                         $locale,
                         $syliusProductAttributeValue
                     )
