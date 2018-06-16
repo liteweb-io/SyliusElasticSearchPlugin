@@ -70,4 +70,9 @@ class ProductView implements ProductViewInterface
      * @var float
      */
     public $rating;
+
+    /**
+     * @var DateTime
+     */
+    public $createdAt;
 }
