@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\ElasticSearchPlugin\Controller;
 
-class PriceView
+class PriceView implements PriceViewInterface
 {
     /**
      * @var int

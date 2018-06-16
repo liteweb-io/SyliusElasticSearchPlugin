@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\ElasticSearchPlugin\Controller;
 
-class ProductView
+class ProductView implements ProductViewInterface
 {
     /**
      * @var int

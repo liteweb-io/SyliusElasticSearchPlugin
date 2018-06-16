@@ -6,13 +6,13 @@ namespace Sylius\ElasticSearchPlugin\Factory\View;
 
 use ONGR\ElasticsearchBundle\Collection\Collection;
 use ONGR\FilterManagerBundle\Search\SearchResponse;
-use Sylius\ElasticSearchPlugin\Controller\AttributeView;
-use Sylius\ElasticSearchPlugin\Controller\ImageView;
-use Sylius\ElasticSearchPlugin\Controller\PriceView;
-use Sylius\ElasticSearchPlugin\Controller\ProductListView;
-use Sylius\ElasticSearchPlugin\Controller\ProductView;
-use Sylius\ElasticSearchPlugin\Controller\TaxonView;
-use Sylius\ElasticSearchPlugin\Controller\VariantView;
+use Sylius\ElasticSearchPlugin\Controller\AttributeViewInterface;
+use Sylius\ElasticSearchPlugin\Controller\ImageViewInterface;
+use Sylius\ElasticSearchPlugin\Controller\PriceViewInterface;
+use Sylius\ElasticSearchPlugin\Controller\ProductListViewInterface;
+use Sylius\ElasticSearchPlugin\Controller\ProductViewInterface;
+use Sylius\ElasticSearchPlugin\Controller\TaxonViewInterface;
+use Sylius\ElasticSearchPlugin\Controller\VariantViewInterface;
 use Sylius\ElasticSearchPlugin\Document\AttributeDocument;
 use Sylius\ElasticSearchPlugin\Document\ImageDocument;
 use Sylius\ElasticSearchPlugin\Document\PriceDocument;
@@ -64,7 +64,7 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function createFromSearchResponse(SearchResponse $response): ProductListView
+    public function createFromSearchResponse(SearchResponse $response): ProductListViewInterface
     {
         $result = $response->getResult();
         $filters = $response->getFilters();
@@ -111,9 +111,9 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
      * @param Collection|TaxonDocument[] $taxons
      * @param TaxonDocument|null $mainTaxonDocument
      *
-     * @return TaxonView
+     * @return TaxonViewInterface
      */
-    private function getTaxonView($taxons, ?TaxonDocument $mainTaxonDocument): TaxonView
+    private function getTaxonView($taxons, ?TaxonDocument $mainTaxonDocument): TaxonViewInterface
     {
         /** @var TaxonView $taxonView */
         $taxonView = new $this->taxonViewClass();
@@ -150,9 +150,9 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
     /**
      * @param PriceDocument $price
      *
-     * @return PriceView
+     * @return PriceViewInterfaceInterface
      */
-    private function getPriceView(PriceDocument $price): PriceView
+    private function getPriceView(PriceDocument $price): PriceViewInterface
     {
         /** @var PriceView $priceView */
         $priceView = new $this->priceViewClass();
@@ -193,9 +193,9 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
     /**
      * @param ProductDocument $product
      *
-     * @return ProductView
+     * @return ProductViewInterface
      */
-    private function getProductView(ProductDocument $product): ProductView
+    private function getProductView(ProductDocument $product): ProductViewInterface
     {
         /** @var ProductView $productView */
         $productView = new $this->productViewClass();

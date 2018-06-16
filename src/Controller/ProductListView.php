@@ -6,7 +6,7 @@ namespace Sylius\ElasticSearchPlugin\Controller;
 
 use ONGR\FilterManagerBundle\Filter\ViewData;
 
-class ProductListView
+class ProductListView implements ProductListViewInterface
 {
     /**
      * @var int

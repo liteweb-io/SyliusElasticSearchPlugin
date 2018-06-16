@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\ElasticSearchPlugin\Controller;
 
-class VariantView
+class VariantView implements VariantViewInterface
 {
     /**
      * @var int
