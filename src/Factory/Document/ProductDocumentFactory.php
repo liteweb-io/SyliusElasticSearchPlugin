@@ -151,6 +151,7 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
         $productDocument->setImages(new ArrayCollection($imageDocuments));
         $productDocument->setTaxons(new ArrayCollection($taxonDocuments));
         $productDocument->setAttributes(new ArrayCollection($attributeDocuments));
+        $productDocument->setInMagazine($product->getInMagazine());
 
         /**
          * Set smallest product variant price, used for search by price
