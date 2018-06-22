@@ -56,6 +56,14 @@ class ProductDocument
      *
      * @ElasticSearch\Property(type="boolean")
      */
+
+    protected $in_magazine;
+    
+    /**
+     * @var bool
+     *
+     * @ElasticSearch\Property(type="boolean")
+     */
     protected $enabled;
 
     /**
@@ -441,5 +449,15 @@ class ProductDocument
     public function setVariants($variants): void
     {
         $this->variants = $variants;
+    }
+    
+    public function setInMagazine(bool $in_magazine) : void
+    {
+        $this->in_magazine = $in_magazine;
+    }
+
+    public function getInMagazine() : bool
+    {
+        return $this->in_magazine;
     }
 }
