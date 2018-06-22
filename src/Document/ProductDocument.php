@@ -451,12 +451,12 @@ class ProductDocument
         $this->variants = $variants;
     }
     
-    public function setInMagazine(bool $in_magazine) : void
+    public function setInMagazine(?bool $in_magazine) : void
     {
         $this->in_magazine = $in_magazine;
     }
 
-    public function getInMagazine() : bool
+    public function getInMagazine() : ?bool
     {
         return $this->in_magazine;
     }
