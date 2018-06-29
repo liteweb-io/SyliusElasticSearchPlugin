@@ -109,12 +109,6 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
         /** @var ImageDocument[] $imageDocuments */
         $imageDocuments = [];
         foreach ($product->getImages() as $productImage) {
-            foreach ($productVariants as $variant) {
-                if ($variant->hasImage($productImage)) {
-                    continue 2;
-                }
-            }
-
             $imageDocuments[] = $this->imageDocumentFactory->create($productImage);
         }
 
