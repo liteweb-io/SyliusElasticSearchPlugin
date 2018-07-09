@@ -39,7 +39,7 @@ final class ProductProjector
      */
     public function __construct(
         Manager $elasticsearchManager,
-        ProductDocumentFactoryInterface $productDocumentFactory
+        $productDocumentFactory
     ) {
         $this->elasticsearchManager = $elasticsearchManager;
         $this->productDocumentRepository = $elasticsearchManager->getRepository(ProductDocument::class);
@@ -95,7 +95,7 @@ final class ProductProjector
             $locales = $channel->getLocales();
             foreach ($locales as $locale) {
                 $this->elasticsearchManager->persist(
-                    $this->productDocumentFactory->create(
+                    $this->productDocumentFactory->createFromSyliusSimpleProductModel(
                         $product,
                         $locale,
                         $channel

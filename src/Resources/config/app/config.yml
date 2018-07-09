@@ -100,7 +100,7 @@ ongr_filter_manager:
         search:
             type: match
             request_field: search
-            document_field: name^3,description,attributes>attributes.name.standard,attributes>attributes.value.standard
+            document_field: id,name^3,description,attributes>attributes.name.standard,attributes>attributes.value.standard
             options:
                 operator: and
         sort:

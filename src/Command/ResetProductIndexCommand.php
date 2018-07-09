@@ -37,9 +37,9 @@ final class ResetProductIndexCommand extends Command
      * @param ProductDocumentFactoryInterface $productDocumentFactory
      */
     public function __construct(
-        ProductRepositoryInterface $productRepository,
+        $productRepository,
         Manager $manager,
-        ProductDocumentFactoryInterface $productDocumentFactory
+        $productDocumentFactory
     ) {
         $this->productRepository = $productRepository;
         $this->elasticsearchManager = $manager;
@@ -88,11 +88,23 @@ final class ResetProductIndexCommand extends Command
                 foreach ($channels as $channel) {
                     $locales = $channel->getLocales();
                     foreach ($locales as $locale) {
-                        $productDocument = $this->productDocumentFactory->create(
-                            $product,
-                            $locale,
-                            $channel
-                        );
+
+
+                        if($this->productDocumentFactory instanceof \Urbanara\CatalogPromotionPlugin\ElasticSearch\Factory\ProductDocumentFactory) {
+                            $productDocument = $this->productDocumentFactory->createFromSyliusSimpleProductModel(
+                                $product,
+                                $locale,
+                                $channel
+                            );
+                        } else{
+                            $productDocument = $this->productDocumentFactory->create(
+                                $product,
+                                $locale,
+                                $channel
+                            );
+                        }
+
+
 
                         $this->elasticsearchManager->persist($productDocument);
 

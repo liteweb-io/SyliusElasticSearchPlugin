@@ -161,6 +161,7 @@ class ProductDocument
         $this->taxons = new Collection();
         $this->images = new Collection();
         $this->variants = new Collection();
+        $this->appliedPromotions = new Collection();
     }
 
     /**
@@ -459,5 +460,52 @@ class ProductDocument
     public function getInMagazine() : ?bool
     {
         return $this->in_magazine;
+    }
+
+    /**
+     * @var PriceDocument
+     *
+     * @ElasticSearch\Embedded(class="Sylius\ElasticSearchPlugin\Document\PriceDocument")
+     */
+    private $originalPrice;
+
+    /**
+     * @var Collection
+     *
+     * @ElasticSearch\Embedded(class="Urbanara\CatalogPromotionPlugin\ElasticSearch\Document\AppliedPromotionDocument", multiple=true)
+     */
+    private $appliedPromotions;
+
+
+    /**
+     * @return PriceDocument
+     */
+    public function getOriginalPrice()
+    {
+        return $this->originalPrice;
+    }
+
+    /**
+     * @param PriceDocument $originalPrice
+     */
+    public function setOriginalPrice(PriceDocument $originalPrice)
+    {
+        $this->originalPrice = $originalPrice;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAppliedPromotions()
+    {
+        return $this->appliedPromotions;
+    }
+
+    /**
+     * @param Collection $appliedPromotions
+     */
+    public function setAppliedPromotions($appliedPromotions)
+    {
+        $this->appliedPromotions = $appliedPromotions;
     }
 }
