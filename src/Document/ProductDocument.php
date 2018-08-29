@@ -51,6 +51,16 @@ class ProductDocument
      */
     protected $name;
 
+
+
+    /**
+     * @var bool
+     *
+     * @ElasticSearch\Property(type="boolean")
+     */
+
+    protected $review;
+
     /**
      * @var bool
      *
@@ -148,6 +158,7 @@ class ProductDocument
      */
     protected $variants;
 
+
     /**
      * @var \DateTimeInterface
      *
@@ -163,6 +174,9 @@ class ProductDocument
         $this->variants = new Collection();
         $this->appliedPromotions = new Collection();
     }
+
+
+
 
     /**
      * @return string
@@ -186,6 +200,27 @@ class ProductDocument
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isReview(): ?bool
+    {
+        return $this->review;
+    }
+
+    /**
+     * @param bool $review
+     */
+    public function setReview(bool $review): void
+    {
+        $this->review = $review;
+    }
+
+    public function getReview() : ?bool
+    {
+        return $this->review;
     }
 
     /**
