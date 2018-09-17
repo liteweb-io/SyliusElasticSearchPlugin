@@ -51,7 +51,30 @@ class ProductDocument
      */
     protected $name;
 
+     /**
+     * @return int
+     */
+    public function getUserId(): int
+    {
+        return $this->user_id;
+    }
 
+    /**
+     * @param int $user_id
+     */
+    public function setUserId(int $user_id): void
+    {
+        $this->user_id = $user_id;
+    }
+
+
+    /**
+     * @var integer
+     *
+     * @ElasticSearch\Property(type="integer")
+     */
+
+    protected $user_id;
 
     /**
      * @var bool
