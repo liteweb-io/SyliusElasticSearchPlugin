@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\ElasticSearchPlugin\Document;
 
+use AppBundle\Entity\Taxon;
 use ONGR\ElasticsearchBundle\Annotation as ElasticSearch;
 use ONGR\ElasticsearchBundle\Collection\Collection;
 
@@ -12,6 +13,53 @@ use ONGR\ElasticsearchBundle\Collection\Collection;
  */
 class TaxonDocument
 {
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name): void
+    {
+        $this->name = $name;
+    }
+
+
+    /**
+     * @var string
+     *
+     * @ElasticSearch\Property(type="keyword")
+     */
+    protected $name;
+    
+    /**
+     * @var int
+     *
+     * @ElasticSearch\Property(type="integer")
+     */
+    protected $id;
+
     /**
      * @var string
      *
@@ -50,6 +98,33 @@ class TaxonDocument
     public function __construct()
     {
         $this->images = new Collection();
+        $this->childrens = new Collection();
+    }
+
+
+    public function addChildren(Taxon $taxon)
+    {
+        $this->childrens->add($taxon);
+    }
+
+    public function removeChildren(Taxon $taxon)
+    {
+        $this->childrens->removeElement($taxon);
+    }
+
+    public function getChildrens()
+    {
+        return $this->childrens;
+    }
+
+    public function setParent(?Taxon $taxon)
+    {
+        $this->parent = $taxon;
+    }
+
+    public function getParent()
+    {
+        return $this->parent;
     }
 
     /**

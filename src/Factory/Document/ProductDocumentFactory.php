@@ -230,6 +230,10 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
         foreach ($productAttributes as $syliusProductAttributeValue) {
             if (in_array($syliusProductAttributeValue->getCode(), $this->attributeWhitelist, true) || empty($this->attributeWhitelist)) {
 
+                //dump($syliusProductAttributeValue->getId(), $syliusProductAttributeValue->getValue());
+
+                //dump($syliusProductAttributeValue->getAttribute()->getConfiguration()['choices']);
+
                 $value = isset($syliusProductAttributeValue->getAttribute()->getConfiguration()['choices']) ?
                     $syliusProductAttributeValue->getAttribute()->getConfiguration()['choices'][$syliusProductAttributeValue->getValue()[0]][$channel->getDefaultLocale()->getCode()] :
                     $syliusProductAttributeValue->getValue();

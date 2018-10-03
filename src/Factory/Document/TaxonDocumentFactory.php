@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Sylius\ElasticSearchPlugin\Factory\Document;
 
+use AppBundle\Entity\Taxon;
 use ONGR\ElasticsearchBundle\Collection\Collection;
 use Sylius\Component\Core\Model\TaxonInterface;
 use Sylius\Component\Locale\Model\LocaleInterface;
@@ -25,6 +26,17 @@ final class TaxonDocumentFactory implements TaxonDocumentFactoryInterface
         $this->imageDocumentFactory = $imageDocumentFactory;
     }
 
+    private function recursiveResolveChildren(Taxon $taxon, TaxonDocument $taxonDocument)
+    {
+        foreach ($taxon->getChildren() as $taxonChild) {
+                $taxonDocument->addChildren($taxonChild);
+
+                if(!$taxonChild->getChildren()->isEmpty()) {
+                    $this->recursiveResolveChildren($taxonChild, $taxonDocument);
+                }
+        }
+    }
+
     /**
      * @param TaxonInterface $taxon Sylius taxon model
      * @param LocaleInterface $localeCode
@@ -41,6 +53,9 @@ final class TaxonDocumentFactory implements TaxonDocumentFactoryInterface
         $taxonDocument = new $this->taxonDocumentClass();
         $taxonDocument->setCode($taxon->getCode());
         $taxonDocument->setSlug($taxonTranslation->getSlug());
+        $taxonDocument->setId($taxon->getId());
+        $taxonDocument->setName($taxonTranslation->getName());
+
         if (is_int($position)) {
             $taxonDocument->setPosition($position);
         } else {

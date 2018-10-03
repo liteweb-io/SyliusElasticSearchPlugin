@@ -84,6 +84,7 @@ final class ResetProductIndexCommand extends Command
             foreach ($products as $product) {
                 $channels = $product->getChannels();
 
+
                 /** @var ChannelInterface $channel */
                 foreach ($channels as $channel) {
                     $locales = $channel->getLocales();
@@ -105,7 +106,7 @@ final class ResetProductIndexCommand extends Command
                         }
 
 
-
+                        dump($productDocument->getId());
                         $this->elasticsearchManager->persist($productDocument);
 
                         ++$productDocumentsCreated;
