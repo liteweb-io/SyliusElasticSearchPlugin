@@ -206,6 +206,7 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
         $productView->rating = $product->getAverageReviewRating();
         $productView->localeCode = $product->getLocaleCode();
         $productView->channelCode = $product->getChannelCode();
+
         if ($product->getImages()->count() > 0) {
             $productView->images = $this->getImageViews($product->getImages());
         }
