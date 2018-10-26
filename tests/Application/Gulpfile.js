@@ -12,13 +12,13 @@ config = [
 ];
 
 gulp.task('admin', function() {
-    gulp.src('../../vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/Gulpfile.js', { read: false })
+    gulp.src('../../vendor/sylius/sylius/src/Sylius/Bundle/AdminBundle/gulpfile.babel.js.bak', { read: false })
         .pipe(chug({ args: config }))
     ;
 });
 
 gulp.task('shop', function() {
-    gulp.src('../../vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/Gulpfile.js', { read: false })
+    gulp.src('../../vendor/sylius/sylius/src/Sylius/Bundle/ShopBundle/gulpfile.babel.js.bak', { read: false })
         .pipe(chug({ args: config }))
     ;
 });
