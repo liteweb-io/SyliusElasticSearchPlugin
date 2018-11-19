@@ -91,7 +91,7 @@ class ProductDocument
      */
 
     protected $in_magazine;
-    
+
     /**
      * @var bool
      *
@@ -188,6 +188,53 @@ class ProductDocument
      * @ElasticSearch\Property(type="date")
      */
     protected $synchronisedAt;
+
+    /**
+     * @var string
+     *
+     * @ElasticSearch\Property(type="keyword")
+     */
+    protected $brand;
+
+    /**
+     * @var integer
+     *
+     * @ElasticSearch\Property(type="integer")
+     */
+    protected $brand_id;
+
+    /**
+     * @return string
+     */
+    public function getBrand(): ?string
+    {
+        return $this->brand;
+    }
+
+    /**
+     * @param string $brand
+     */
+    public function setBrand(?string $brand): void
+    {
+        $this->brand = $brand;
+    }
+
+    /**
+     * @return int
+     */
+    public function getBrandId(): ?int
+    {
+        return $this->brand_id;
+    }
+
+    /**
+     * @param int $brand_id
+     */
+    public function setBrandId(?int $brand_id): void
+    {
+        $this->brand_id = $brand_id;
+    }
+
 
     public function __construct()
     {
@@ -509,7 +556,7 @@ class ProductDocument
     {
         $this->variants = $variants;
     }
-    
+
     public function setInMagazine(?bool $in_magazine) : void
     {
         $this->in_magazine = $in_magazine;

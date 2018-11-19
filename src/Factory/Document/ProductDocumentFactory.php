@@ -148,6 +148,8 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
         $productDocument->setInMagazine($product->getInMagazine());
         $productDocument->setReview($product->getReviewed());
         $productDocument->setUserId($product->getUser()->getId());
+        $productDocument->setBrand($product->getBrand() !== null ? $product->getBrand()->getName() : null);
+        $productDocument->setBrandId($product->getBrand() !== null ? $product->getBrand()->getId() : null);
 
 
         /**
