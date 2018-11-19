@@ -233,7 +233,7 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
                 $value = $syliusProductAttributeValue->getValue();
 
                 if( isset($syliusProductAttributeValue->getAttribute()->getConfiguration()['choices']) && is_array($syliusProductAttributeValue->getValue()) && $syliusProductAttributeValue->getValue() !== []) {
-                    $value = $syliusProductAttributeValue->getAttribute()->getConfiguration()['choices'][$syliusProductAttributeValue->getValue()[0]];
+                    $value = $syliusProductAttributeValue->getAttribute()->getConfiguration()['choices'][$syliusProductAttributeValue->getValue()[0]][$channel->getDefaultLocale()->getCode()];
                 }
 
                 $attributeDocuments = array_merge(
