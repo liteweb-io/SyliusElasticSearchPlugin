@@ -206,6 +206,30 @@ class ProductDocument
     /**
      * @return string
      */
+    public function getBrandSlug(): ?string
+    {
+        return $this->brand_slug;
+    }
+
+    /**
+     * @param string $brand_slug
+     */
+    public function setBrandSlug(?string $brand_slug): void
+    {
+        $this->brand_slug = $brand_slug;
+    }
+
+
+    /**
+     * @var string
+     *
+     * @ElasticSearch\Property(type="keyword")
+     */
+    protected $brand_slug;
+
+    /**
+     * @return string
+     */
     public function getBrand(): ?string
     {
         return $this->brand;
