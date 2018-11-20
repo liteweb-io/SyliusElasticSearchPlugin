@@ -104,9 +104,7 @@ final class ResetProductIndexCommand extends Command
                                 $channel
                             );
                         }
-
-
-                        dump($productDocument->getId());
+                        
                         $this->elasticsearchManager->persist($productDocument);
 
                         ++$productDocumentsCreated;
