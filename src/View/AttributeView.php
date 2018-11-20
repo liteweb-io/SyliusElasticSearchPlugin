@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\ElasticSearchPlugin\Controller;
+namespace Sylius\ElasticSearchPlugin\View;
 
 class AttributeView implements AttributeViewInterface
 {

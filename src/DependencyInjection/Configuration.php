@@ -13,13 +13,13 @@ declare(strict_types=1);
 
 namespace Sylius\ElasticSearchPlugin\DependencyInjection;
 
-use Sylius\ElasticSearchPlugin\Controller\AttributeView;
-use Sylius\ElasticSearchPlugin\Controller\ImageView;
-use Sylius\ElasticSearchPlugin\Controller\PriceView;
-use Sylius\ElasticSearchPlugin\Controller\ProductListView;
-use Sylius\ElasticSearchPlugin\Controller\ProductView;
-use Sylius\ElasticSearchPlugin\Controller\TaxonView;
-use Sylius\ElasticSearchPlugin\Controller\VariantView;
+use Sylius\ElasticSearchPlugin\View\AttributeView;
+use Sylius\ElasticSearchPlugin\View\ImageView;
+use Sylius\ElasticSearchPlugin\View\PriceView;
+use Sylius\ElasticSearchPlugin\View\ProductListView;
+use Sylius\ElasticSearchPlugin\View\ProductView;
+use Sylius\ElasticSearchPlugin\View\TaxonView;
+use Sylius\ElasticSearchPlugin\View\VariantView;
 use Sylius\ElasticSearchPlugin\Document\AttributeDocument;
 use Sylius\ElasticSearchPlugin\Document\ImageDocument;
 use Sylius\ElasticSearchPlugin\Document\OptionDocument;
