@@ -6,6 +6,7 @@ namespace Sylius\ElasticSearchPlugin\Factory\View;
 
 use ONGR\ElasticsearchBundle\Collection\Collection;
 use ONGR\FilterManagerBundle\Search\SearchResponse;
+use Sylius\ElasticSearchPlugin\View\ImageView;
 use Sylius\ElasticSearchPlugin\View\ProductViewInterface;
 use Sylius\ElasticSearchPlugin\View\AttributeView;
 use Sylius\ElasticSearchPlugin\View\PriceViewInterface;
@@ -216,7 +217,6 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
         $productView->variants = $this->getVariantViews($product->getVariants());
         $productView->price = $this->getPriceView($product->getPrice());
         $productView->createdAt = $product->getCreatedAt();
-        $productView->in_magazine = $product->getInMagazine();
 
         return $productView;
     }
