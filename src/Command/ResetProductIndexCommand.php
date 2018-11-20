@@ -92,7 +92,7 @@ final class ResetProductIndexCommand extends Command
 
 
                         if($this->productDocumentFactory instanceof \Urbanara\CatalogPromotionPlugin\ElasticSearch\Factory\ProductDocumentFactory) {
-                            $productDocument = $this->productDocumentFactory->createFromSyliusSimpleProductModel(
+                            $productDocument = $this->productDocumentFactory->create(
                                 $product,
                                 $locale,
                                 $channel

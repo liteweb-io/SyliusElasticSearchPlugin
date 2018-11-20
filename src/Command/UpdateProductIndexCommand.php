@@ -49,7 +49,7 @@ final class UpdateProductIndexCommand extends Command
     public function __construct(
         ProductRepositoryInterface $productRepository,
         Manager $elasticsearchManager,
-        $productDocumentFactory
+        ProductDocumentFactoryInterface $productDocumentFactory
     ) {
         $this->productRepository = $productRepository;
         $this->elasticsearchManager = $elasticsearchManager;
@@ -132,7 +132,7 @@ final class UpdateProductIndexCommand extends Command
             $locales = $channel->getLocales();
 
             foreach ($locales as $locale) {
-                $this->elasticsearchManager->persist($this->productDocumentFactory->createFromSyliusSimpleProductModel(
+                $this->elasticsearchManager->persist($this->productDocumentFactory->create(
                     $product,
                     $locale,
                     $channel
