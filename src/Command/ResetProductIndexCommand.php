@@ -89,22 +89,13 @@ final class ResetProductIndexCommand extends Command
                 foreach ($channels as $channel) {
                     $locales = $channel->getLocales();
                     foreach ($locales as $locale) {
-
-
-                        if($this->productDocumentFactory instanceof \Urbanara\CatalogPromotionPlugin\ElasticSearch\Factory\ProductDocumentFactory) {
-                            $productDocument = $this->productDocumentFactory->create(
-                                $product,
-                                $locale,
-                                $channel
-                            );
-                        } else{
-                            $productDocument = $this->productDocumentFactory->create(
-                                $product,
-                                $locale,
-                                $channel
-                            );
-                        }
                         
+                        $productDocument = $this->productDocumentFactory->create(
+                            $product,
+                            $locale,
+                            $channel
+                        );
+
                         $this->elasticsearchManager->persist($productDocument);
 
                         ++$productDocumentsCreated;
