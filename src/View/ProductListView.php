@@ -2,9 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Sylius\ElasticSearchPlugin\Controller;
-
-use ONGR\FilterManagerBundle\Filter\ViewData;
+namespace Sylius\ElasticSearchPlugin\View;
 
 class ProductListView implements ProductListViewInterface
 {

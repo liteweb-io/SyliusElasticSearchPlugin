@@ -145,13 +145,6 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
         $productDocument->setImages(new ArrayCollection($imageDocuments));
         $productDocument->setTaxons(new ArrayCollection($taxonDocuments));
         $productDocument->setAttributes(new ArrayCollection($attributeDocuments));
-        $productDocument->setInMagazine($product->getInMagazine());
-        $productDocument->setReview($product->getReviewed());
-        $productDocument->setUserId($product->getUser()->getId());
-        $productDocument->setBrand($product->getBrand() !== null ? $product->getBrand()->getName() : null);
-        $productDocument->setBrandId($product->getBrand() !== null ? $product->getBrand()->getId() : null);
-        $productDocument->setBrandSlug($product->getBrand() !== null ? $product->getBrand()->getSlug() : null);
-
 
         /**
          * Set smallest product variant price, used for search by price

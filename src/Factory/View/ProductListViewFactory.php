@@ -6,13 +6,14 @@ namespace Sylius\ElasticSearchPlugin\Factory\View;
 
 use ONGR\ElasticsearchBundle\Collection\Collection;
 use ONGR\FilterManagerBundle\Search\SearchResponse;
-use Sylius\ElasticSearchPlugin\Controller\AttributeViewInterface;
-use Sylius\ElasticSearchPlugin\Controller\ImageViewInterface;
-use Sylius\ElasticSearchPlugin\Controller\PriceViewInterface;
-use Sylius\ElasticSearchPlugin\Controller\ProductListViewInterface;
-use Sylius\ElasticSearchPlugin\Controller\ProductViewInterface;
-use Sylius\ElasticSearchPlugin\Controller\TaxonViewInterface;
-use Sylius\ElasticSearchPlugin\Controller\VariantViewInterface;
+use Sylius\ElasticSearchPlugin\View\ProductViewInterface;
+use Sylius\ElasticSearchPlugin\View\AttributeView;
+use Sylius\ElasticSearchPlugin\View\PriceViewInterface;
+use Sylius\ElasticSearchPlugin\View\ProductListViewInterface;
+use Sylius\ElasticSearchPlugin\View\ProductView;
+use Sylius\ElasticSearchPlugin\View\TaxonView;
+use Sylius\ElasticSearchPlugin\View\TaxonViewInterface;
+use Sylius\ElasticSearchPlugin\View\VariantView;
 use Sylius\ElasticSearchPlugin\Document\AttributeDocument;
 use Sylius\ElasticSearchPlugin\Document\ImageDocument;
 use Sylius\ElasticSearchPlugin\Document\PriceDocument;
@@ -150,7 +151,7 @@ final class ProductListViewFactory implements ProductListViewFactoryInterface
     /**
      * @param PriceDocument $price
      *
-     * @return PriceViewInterfaceInterface
+     * @return PriceViewInterface
      */
     private function getPriceView(PriceDocument $price): PriceViewInterface
     {

@@ -51,47 +51,6 @@ class ProductDocument
      */
     protected $name;
 
-     /**
-     * @return int
-     */
-    public function getUserId(): int
-    {
-        return $this->user_id;
-    }
-
-    /**
-     * @param int $user_id
-     */
-    public function setUserId(int $user_id): void
-    {
-        $this->user_id = $user_id;
-    }
-
-
-    /**
-     * @var integer
-     *
-     * @ElasticSearch\Property(type="integer")
-     */
-
-    protected $user_id;
-
-    /**
-     * @var bool
-     *
-     * @ElasticSearch\Property(type="boolean")
-     */
-
-    protected $review;
-
-    /**
-     * @var bool
-     *
-     * @ElasticSearch\Property(type="boolean")
-     */
-
-    protected $in_magazine;
-
     /**
      * @var bool
      *
@@ -189,75 +148,6 @@ class ProductDocument
      */
     protected $synchronisedAt;
 
-    /**
-     * @var string
-     *
-     * @ElasticSearch\Property(type="keyword")
-     */
-    protected $brand;
-
-    /**
-     * @var integer
-     *
-     * @ElasticSearch\Property(type="integer")
-     */
-    protected $brand_id;
-
-    /**
-     * @return string
-     */
-    public function getBrandSlug(): ?string
-    {
-        return $this->brand_slug;
-    }
-
-    /**
-     * @param string $brand_slug
-     */
-    public function setBrandSlug(?string $brand_slug): void
-    {
-        $this->brand_slug = $brand_slug;
-    }
-
-
-    /**
-     * @var string
-     *
-     * @ElasticSearch\Property(type="keyword")
-     */
-    protected $brand_slug;
-
-    /**
-     * @return string
-     */
-    public function getBrand(): ?string
-    {
-        return $this->brand;
-    }
-
-    /**
-     * @param string $brand
-     */
-    public function setBrand(?string $brand): void
-    {
-        $this->brand = $brand;
-    }
-
-    /**
-     * @return int
-     */
-    public function getBrandId(): ?int
-    {
-        return $this->brand_id;
-    }
-
-    /**
-     * @param int $brand_id
-     */
-    public function setBrandId(?int $brand_id): void
-    {
-        $this->brand_id = $brand_id;
-    }
 
 
     public function __construct()
@@ -266,10 +156,7 @@ class ProductDocument
         $this->taxons = new Collection();
         $this->images = new Collection();
         $this->variants = new Collection();
-        $this->appliedPromotions = new Collection();
     }
-
-
 
 
     /**
@@ -581,60 +468,5 @@ class ProductDocument
         $this->variants = $variants;
     }
 
-    public function setInMagazine(?bool $in_magazine) : void
-    {
-        $this->in_magazine = $in_magazine;
-    }
 
-    public function getInMagazine() : ?bool
-    {
-        return $this->in_magazine;
-    }
-
-    /**
-     * @var PriceDocument
-     *
-     * @ElasticSearch\Embedded(class="Sylius\ElasticSearchPlugin\Document\PriceDocument")
-     */
-    private $originalPrice;
-
-    /**
-     * @var Collection
-     *
-     * @ElasticSearch\Embedded(class="Urbanara\CatalogPromotionPlugin\ElasticSearch\Document\AppliedPromotionDocument", multiple=true)
-     */
-    private $appliedPromotions;
-
-
-    /**
-     * @return PriceDocument
-     */
-    public function getOriginalPrice()
-    {
-        return $this->originalPrice;
-    }
-
-    /**
-     * @param PriceDocument $originalPrice
-     */
-    public function setOriginalPrice(PriceDocument $originalPrice)
-    {
-        $this->originalPrice = $originalPrice;
-    }
-
-    /**
-     * @return Collection
-     */
-    public function getAppliedPromotions()
-    {
-        return $this->appliedPromotions;
-    }
-
-    /**
-     * @param Collection $appliedPromotions
-     */
-    public function setAppliedPromotions($appliedPromotions)
-    {
-        $this->appliedPromotions = $appliedPromotions;
-    }
 }
