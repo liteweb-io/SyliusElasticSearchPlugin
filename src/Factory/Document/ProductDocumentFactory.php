@@ -6,7 +6,6 @@ namespace Sylius\ElasticSearchPlugin\Factory\Document;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection as DoctrineCollection;
-use Doctrine\Common\Collections\Collection;
 use Ramsey\Uuid\Uuid;
 use Sylius\Component\Core\Model\ChannelInterface;
 use Sylius\Component\Core\Model\ChannelPricingInterface;
@@ -220,8 +219,6 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
             $channel->getDefaultLocale()->getCode()
         );
 
-        //dump($productAttributes); die;
-
         $attributeDocuments = [];
         foreach ($productAttributes as $syliusProductAttributeValue) {
             if (in_array($syliusProductAttributeValue->getCode(), $this->attributeWhitelist, true) || empty($this->attributeWhitelist)) {
@@ -229,7 +226,8 @@ final class ProductDocumentFactory implements ProductDocumentFactoryInterface
                 $value = $syliusProductAttributeValue->getValue();
 
                 if( isset($syliusProductAttributeValue->getAttribute()->getConfiguration()['choices']) && is_array($syliusProductAttributeValue->getValue()) && $syliusProductAttributeValue->getValue() !== []) {
-                    $value = $syliusProductAttributeValue->getAttribute()->getConfiguration()['choices'][$syliusProductAttributeValue->getValue()[0]][$channel->getDefaultLocale()->getCode()];
+                    $multilangValue = $syliusProductAttributeValue->getAttribute()->getConfiguration()['choices'][$syliusProductAttributeValue->getValue()[0]];
+                    $value = $multilangValue[$locale->getCode()] ?? $multilangValue[$channel->getDefaultLocale()->getCode()];
                 }
 
                 $attributeDocuments = array_merge(
